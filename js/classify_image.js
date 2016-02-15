@@ -76,6 +76,7 @@ function preproc(url, targetLen, meanimg, callback) {
 function start() {
    $("#re").html("Let me see...");
 	 $('#isaw').html(">");
+  $("#ld").show();
   
    $.getJSON("./model/fastpoor.json", function(model) {
        var url = document.getElementById("imageURL").value;
@@ -83,6 +84,7 @@ function start() {
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
              $('#ipg').show();
+          $("#re").html("Processing vision...");
            logEvent("Let me think...");
            // delay 1sec before running prediction, so the log event renders on webpage.
            var start = new Date().getTime();
@@ -128,11 +130,15 @@ function start() {
 			  pred.destroy();
            });
        });
-   });
+   }).always(function() {
+    $("#ld").fadeOut();
+    
+  });
 }
 function start2(murl) {
    $("#re").html("Let me see...");
 	 $('#isaw').html(">");
+   $("#ld").show();
   
 
    $.getJSON("./model/fastpoor.json", function(model) {
@@ -141,6 +147,7 @@ function start2(murl) {
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
            $('#ipg').show();
+            $("#re").html("Processing vision...");
            logEvent("Let me think...");
 		   
            // delay 1sec before running prediction, so the log event renders on webpage.
@@ -171,6 +178,7 @@ function start2(murl) {
                //logEvent("finished prediction...");
 			      $("#ipg").hide();
 
+
                out = pred.output(0);
                max_index = 0;
                for (var i = 0; i < out.data.length; ++i) {
@@ -187,5 +195,8 @@ function start2(murl) {
 			  pred.destroy();
            });
        });
-   });
+   }).always(function() {
+    $("#ld").fadeOut();
+    
+  });;
 }
