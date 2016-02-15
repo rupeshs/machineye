@@ -114,7 +114,8 @@ function start() {
                }
                var end = new Date().getTime();
                var time = (end - start) / 1000;
-               logEvent('This looks like ' + model.synset[max_index] );
+                var wis=model.synset[max_index];
+               logEvent('This looks like ' +  wis.substring(10));
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
@@ -124,7 +125,7 @@ function start() {
    });
 }
 function start2(murl) {
-	 $('#isaw').html("");
+	 $('#isaw').html(">>");
    $.getJSON("./model/fastpoor.json", function(model) {
        var url = murl;
        pred = new Predictor(model, {'data': [1, 3, 224, 224]});
@@ -166,7 +167,8 @@ function start2(murl) {
                }
                var end = new Date().getTime();
                var time = (end - start) / 1000;
-               logEvent('This looks like ' + model.synset[max_index] );
+               var wis=model.synset[max_index];
+               logEvent('This looks like ' +  wis.substring(10));
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
