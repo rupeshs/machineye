@@ -189,6 +189,7 @@ function start2(murl) {
                var wis=model.synset[max_index];
                logEvent('This looks like ' +  wis.substring(10));
                 $("#re").html(wis.substring(10));
+                
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
