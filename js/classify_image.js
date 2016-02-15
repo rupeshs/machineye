@@ -115,7 +115,7 @@ function start() {
                var end = new Date().getTime();
                var time = (end - start) / 1000;
                logEvent('This looks like ' + model.synset[max_index] );
-			   logEvent('time wasted to think ' + time + 'secs' );
+			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
 			  pred.destroy();
@@ -167,7 +167,7 @@ function start2(murl) {
                var end = new Date().getTime();
                var time = (end - start) / 1000;
                logEvent('This looks like ' + model.synset[max_index] );
-			   logEvent('Time to think ' + time + 'secs' );
+			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
 			  pred.destroy();
