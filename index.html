@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Machine Eye</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="js/libmxnet_predict.js"></script>
+    <script src="js/nprogress.js"></script>
+  <script src="js/mxnet_predict.js"></script>
+  <script src="js/classify_image.js"></script>
+   <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+   <link href="css/nprogress.css" rel="stylesheet">
+   <script>
+   
+   $(document).ready(function() {
+  // Handler for .ready() called.
+   NProgress.start();
+  $("#file_input").change(function(e){
+
+
+    var URL = window.webkitURL || window.URL;
+    var url = URL.createObjectURL(e.target.files[0]);
+    var img = new Image();
+    img.src = url;
+
+console.log("asd");
+start2(url);
+  
+
+
+});
+ NProgress.set(1.0);
+});
+   
+   </script>
+</head>
+<body>
+	
+ <div class="container">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Machine Eye <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> </a>
+        </div>
+      
+      </div>
+    </nav>
+ </div>
+            
+    <!-- Begin page content -->
+    <div class="container">
+	<div class="col-md-6">
+	  <ul class="nav nav-tabs" id="myTab">
+			  <li class="active"><a data-target="#fle" data-toggle="tab">File</a></li>
+			  <li><a data-target="#imu" data-toggle="tab">Image URL</a></li>
+			  
+			</ul>
+
+  <div class="tab-content">
+			  <div class="tab-pane active" id="fle"><div class="input-group" style="margin:20px;">
+     <input type="file" class="form-control"  id="file_input">
+	 <span class="input-group-btn">
+	 <button class="btn btn-default" type="button"onclick="start()">See this <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
+	 </span>
+	 
+	 </div></div>
+			  <div class="tab-pane" id="imu">
+			  <div class="input-group" style="margin:20px;">
+      <input type="text" name="imageurl" id="imageURL" class="form-control" placeholder="Image URL...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"onclick="start()">See this <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></button>
+      </span>
+	  
+    </div><!-- /input-group -->
+				  </div>
+			 
+</div>
+  
+
+			  </div>
+  <div class="progress">
+  <div  id="myProgress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+         aria-valuemin="0" aria-valuemax="100" >
+    </div>
+  </div>
+  <div id="image">
+  <canvas id="retina" width="224" height="224"></canvas>
+  </div>
+ 
+			  
+  <div id="isaw"  class="well" style="font-weight:bold;" role="alert"></div>
+	</div>
+    <footer class="footer">
+      <div class="container">
+       © 2016 <a href=https://github.com/rupeshs>Rupesh Sreeraman</a> 
+      </div>
+    </footer>
+	
+</body>
+
+
+</html>
