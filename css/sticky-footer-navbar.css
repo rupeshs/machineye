@@ -3,10 +3,12 @@
 html {
   position: relative;
   min-height: 100%;
+  font-family: 'Play', sans-serif;
 }
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  font-family: 'Play', sans-serif;
 }
 .footer {
   position: absolute;
@@ -23,7 +25,7 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-  padding: 60px 15px 0;
+  padding: 30px 15px 0;
 }
 .container .text-muted {
   margin: 20px 0;

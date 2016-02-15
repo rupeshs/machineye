@@ -1,12 +1,12 @@
 
 function logProgress(progress) {
-  $('#myProgress')
+  $('#ipg')
         .css('width', progress+'%')
         .attr('aria-valuenow', progress);
 }
 
 function resetProgress() {
-  $('#myProgress')
+  $('#ipg')
         .attr('class', 'progress-bar progress-bar-success')
         .css('width', '0%')
         .attr('aria-valuenow', '0')
@@ -21,7 +21,7 @@ function logEvent(str) {
 }
 
 function logError(message) {
-  $('#myProgress')
+  $('#ipg')
         .attr('class', 'progress-bar progress-bar-danger')
         .css('width', '100%')
         .attr('aria-valuenow', 100).html(message);
@@ -74,12 +74,15 @@ function preproc(url, targetLen, meanimg, callback) {
 }
 
 function start() {
-	 $('#isaw').html("");
+   $("#re").html("Let me see...");
+	 $('#isaw').html(">");
+  
    $.getJSON("./model/fastpoor.json", function(model) {
        var url = document.getElementById("imageURL").value;
        pred = new Predictor(model, {'data': [1, 3, 224, 224]});
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
+             $('#ipg').show();
            logEvent("Let me think...");
            // delay 1sec before running prediction, so the log event renders on webpage.
            var start = new Date().getTime();
@@ -107,6 +110,7 @@ function start() {
            }
            trainloop(0, 1, 0, function() {
                //logEvent("finished prediction...");
+                $("#ipg").hide();
                out = pred.output(0);
                max_index = 0;
                for (var i = 0; i < out.data.length; ++i) {
@@ -116,6 +120,8 @@ function start() {
                var time = (end - start) / 1000;
                 var wis=model.synset[max_index];
                logEvent('This looks like ' +  wis.substring(10));
+                $("#re").html(wis.substring(10));
+
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 
@@ -125,12 +131,16 @@ function start() {
    });
 }
 function start2(murl) {
-	 $('#isaw').html(">>");
+   $("#re").html("Let me see...");
+	 $('#isaw').html(">");
+  
+
    $.getJSON("./model/fastpoor.json", function(model) {
        var url = murl;
        pred = new Predictor(model, {'data': [1, 3, 224, 224]});
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
+           $('#ipg').show();
            logEvent("Let me think...");
 		   
            // delay 1sec before running prediction, so the log event renders on webpage.
@@ -159,7 +169,8 @@ function start2(murl) {
            }
            trainloop(0, 1, 0, function() {
                //logEvent("finished prediction...");
-			   
+			      $("#ipg").hide();
+
                out = pred.output(0);
                max_index = 0;
                for (var i = 0; i < out.data.length; ++i) {
@@ -169,6 +180,7 @@ function start2(murl) {
                var time = (end - start) / 1000;
                var wis=model.synset[max_index];
                logEvent('This looks like ' +  wis.substring(10));
+                $("#re").html(wis.substring(10));
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
                 

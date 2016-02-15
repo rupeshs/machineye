@@ -15,10 +15,12 @@
   <script src="js/classify_image.js"></script>
    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
    <link href="css/nprogress.css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
    <script>
    
    $(document).ready(function() {
   // Handler for .ready() called.
+   $.ajaxSetup({ cache: true });
    NProgress.start();
   $("#file_input").change(function(e){
 
@@ -42,10 +44,11 @@ start2(url);
 <body>
 	
  <div class="container">
-
+ 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -62,7 +65,10 @@ start2(url);
             
     <!-- Begin page content -->
     <div class="container">
+     <div id="stat"><h3 id="re"><h3></div>
+    <div class="row">
 	<div class="col-md-6">
+
 	  <ul class="nav nav-tabs" id="myTab">
 			  <li class="active"><a data-target="#fle" data-toggle="tab">File</a></li>
 			  <li><a data-target="#imu" data-toggle="tab">Image URL</a></li>
@@ -88,20 +94,22 @@ start2(url);
 				  </div>
 			 
 </div>
-  
-
+			
 			  </div>
+			  
+  <div class="col-md-6">		  
   <div class="progress">
-  <div  id="myProgress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
+  <div  id="ipg" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
          aria-valuemin="0" aria-valuemax="100" >
     </div>
   </div>
   <div id="image">
   <canvas id="retina" width="224" height="224"></canvas>
   </div>
- 
-			  
-  <div id="isaw"  class="well" style="font-weight:bold;" role="alert"></div>
+</div>
+
+	</div>		  
+  <div id="isaw"  class="well" style="border-radius:6px;background-color:black;color:rgb(0,255,0);height:150px;" role="alert"></div>
 	</div>
     <footer class="footer">
       <div class="container">
