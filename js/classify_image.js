@@ -73,76 +73,23 @@ function preproc(url, targetLen, meanimg, callback) {
   image.src = url;
 }
 
-function start() {
-   $("#re").html("Let me see...");
-	 $('#isaw').html(">");
-  $("#ld").show();
-  
-   $.getJSON("./model/fastpoor.json", function(model) {
-       var url = document.getElementById("imageURL").value;
-       pred = new Predictor(model, {'data': [1, 3, 224, 224]});
-       preproc(url, 224, pred.meanimg,  function(nd) {
-           pred.setinput('data', nd);
-             $('#ipg').show();
-          $("#re").html("Processing vision...");
-           logEvent("Let me think...");
-           // delay 1sec before running prediction, so the log event renders on webpage.
-           var start = new Date().getTime();
-           // print every 10%
-           var print_step = 10;
-           // reset progress bar
-           resetProgress();
 
-           function trainloop(step, nleft, next_goal, finish_callback) {
-               if (nleft == 0) {
-                 finish_callback(); return;
-               }
-               nleft = pred.partialforward(step);
-               progress = (step + 1) / (nleft + step + 1) * 100;
-               if (progress >= next_goal || progress == 100) {
-                   logProgress(progress);
-                   setTimeout(function() {
-                       trainloop(step + 1, nleft, next_goal + print_step, finish_callback);
-                   }, 1);
-               } else {
-                   setTimeout(function() {
-                       trainloop(step + 1, nleft, next_goal, finish_callback);
-                   }, 0);
-               }
-           }
-           trainloop(0, 1, 0, function() {
-               //logEvent("finished prediction...");
-                $("#ipg").hide();
-               out = pred.output(0);
-               max_index = 0;
-               for (var i = 0; i < out.data.length; ++i) {
-                   if (out.data[max_index] < out.data[i]) max_index = i;
-               }
-               var end = new Date().getTime();
-               var time = (end - start) / 1000;
-                var wis=model.synset[max_index];
-               logEvent('This looks like ' +  wis.substring(10));
-                $("#re").html(wis.substring(10));
-
-			   logEvent('Elapsed time ' + time + 'secs' );
-			   
-                
-			  pred.destroy();
-           });
-       });
-   }).always(function() {
-    $("#ld").fadeOut();
-    
-  });
-}
 function start2(murl) {
    $("#re").html("Let me see...");
 	 $('#isaw').html(">");
    $("#ld").show();
-  
+ 
 
    $.getJSON("./model/fastpoor.json", function(model) {
-       var url = murl;
+       
+	   if (murl.length == 0) {
+	  console.log("empty");
+	  var url = document.getElementById("imageURL").value;
+}
+else{
+	var url = murl;
+	
+}
        pred = new Predictor(model, {'data': [1, 3, 224, 224]});
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
