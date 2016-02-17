@@ -78,10 +78,10 @@ function start2(murl) {
    $("#re").html("Let me see...");
 	 $('#isaw').html(">");
    $("#ld").show();
- 
+ NProgress.start();
 
    $.getJSON("./model/fastpoor.json", function(model) {
-       
+       NProgress.done();
 	   if (murl.length == 0) {
 	  console.log("empty");
 	  var url = document.getElementById("imageURL").value;

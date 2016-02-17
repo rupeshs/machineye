@@ -20,9 +20,9 @@
   display: block;
   position: absolute;
   right: 0px;
-  width: 100px;
+  width: 200px;
   height: 100%;
-  box-shadow: 0 0 10px #00ff00, 0 0 10px #00ff00;
+  box-shadow: 0 0 6px #00ff00, 0 0 6px #00ff00;
   opacity: 1.0;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
