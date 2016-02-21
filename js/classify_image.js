@@ -92,6 +92,7 @@ function start2(murl) {
         .attr('aria-valuenow', '0')
         .html('');
  NProgress.start();
+ $('#ipg').show();
 $.ajax({
      xhr: function(){
        var xhr = new window.XMLHttpRequest();
@@ -100,7 +101,7 @@ $.ajax({
        xhr.addEventListener("progress", function(evt){
          if (evt.lengthComputable) {
            var percentComplete = evt.loaded / evt.total;
-           console.log(percentComplete*100);
+          // console.log(percentComplete*100);
            logProgress(percentComplete*100);
            NProgress.set(percentComplete);
            
