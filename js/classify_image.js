@@ -102,6 +102,7 @@ $.ajax({
        xhr.addEventListener("progress", function(evt){
          if (evt.lengthComputable) {
            var percentComplete = evt.loaded / evt.total;
+           $("#pgm").html("Loading model,please wait...(" +Math.round(percentComplete*100)+"%)");
           // console.log(percentComplete*100);
            logProgress(percentComplete*100);
            NProgress.set(percentComplete);
