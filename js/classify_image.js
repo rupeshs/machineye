@@ -87,7 +87,7 @@ function start2(murl) {
 	 $('#isaw').html("> waiting for image...");
    $("#ld").show();
     $('#ipg')
-        .attr('class', 'progress-bar progress-bar-default')
+        .attr('class', 'progress-bar progress-bar-info')
         .css('width', '0%')
         .attr('aria-valuenow', '0')
         .html('');
