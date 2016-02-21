@@ -21,6 +21,9 @@ function logEvent(str) {
 }
 
 function logError(message) {
+   $("#re").html("Oops...Error");
+   $("#re").css("color","red");
+   $('#ipg').show();
   $('#ipg')
         .attr('class', 'progress-bar progress-bar-danger')
         .css('width', '100%')
@@ -66,24 +69,30 @@ function preproc(url, targetLen, meanimg, callback) {
     }
     var nd = ndarray(data, [1, 3, targetLen, targetLen]);
     callback(nd);
+
   };
+
   $(image).bind('error', function (event) {
     logError("Opps.. Failed to load image " + url);
   });
+   // $("#retina").css("border-radius","50");
+     blurElement("#retina", 50);
   image.src = url;
 }
 
 
 function start2(murl) {
-   $("#re").html("Let me see...");
-	 $('#isaw').html(">");
+   $("#re").css("color","rgb(0,0,255)");
+   $("#re").html("Let me see  <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"> </span>");
+	 $('#isaw').html("> waiting for image...");
    $("#ld").show();
  NProgress.start();
+
 
    $.getJSON("./model/fastpoor.json", function(model) {
        NProgress.done();
 	   if (murl.length == 0) {
-	  console.log("empty");
+	  
 	  var url = document.getElementById("imageURL").value;
 }
 else{
@@ -94,8 +103,10 @@ else{
        preproc(url, 224, pred.meanimg,  function(nd) {
            pred.setinput('data', nd);
            $('#ipg').show();
+             $('#isaw').html("");
             $("#re").html("Processing vision...");
-           logEvent("Let me think...");
+
+           logEvent("> Let me think...");
 		   
            // delay 1sec before running prediction, so the log event renders on webpage.
            var start = new Date().getTime();
@@ -108,8 +119,19 @@ else{
                if (nleft == 0) {
                  finish_callback(); return;
                }
+               releft=nleft;
+               if(nleft=="1")
+                  releft="wait";
+                
+                  $("#re").css("color","#f0ad4e");
+
+               $("#re").html("Processing convolutional neural networks..."+releft );
+        
                nleft = pred.partialforward(step);
                progress = (step + 1) / (nleft + step + 1) * 100;
+               // $("#retina").css("opacity",progress/100.0);
+            
+              blurElement("#retina", nleft);
                if (progress >= next_goal || progress == 100) {
                    logProgress(progress);
                    setTimeout(function() {
@@ -135,7 +157,10 @@ else{
                var time = (end - start) / 1000;
                var wis=model.synset[max_index];
                logEvent('This looks like ' +  wis.substring(10));
-                $("#re").html(wis.substring(10));
+               
+               $("#re").css("color","rgb(0,0,0");
+                  
+                $("#re").html("Looks like <span style=\"border-raidus:4px;background-color: #5bc0de;padding-left:4px;padding-right:4px;color: #ffffff;\">"+wis.substring(10)+"</span>");
                 
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
@@ -148,3 +173,14 @@ else{
     
   });;
 }
+  function blurElement(element, size){
+            var filterVal = 'blur('+size+'px)';
+            $(element)
+              .css('filter',filterVal)
+              .css('webkitFilter',filterVal)
+              .css('mozFilter',filterVal)
+              .css('oFilter',filterVal)
+              .css('msFilter',filterVal);
+        }
+
+   
