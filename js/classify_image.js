@@ -86,13 +86,14 @@ function start2(murl) {
    $("#re").html("Let me see  <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"> </span>");
 	 $('#isaw').html("> waiting for image...");
    $("#ld").show();
+   $('#ipg').show();
     $('#ipg')
         .attr('class', 'progress-bar progress-bar-info')
         .css('width', '0%')
         .attr('aria-valuenow', '0')
         .html('');
  NProgress.start();
- $('#ipg').show();
+ 
 $.ajax({
      xhr: function(){
        var xhr = new window.XMLHttpRequest();
