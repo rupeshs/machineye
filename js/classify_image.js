@@ -14,7 +14,7 @@ function resetProgress() {
 }
 
 function logEvent(str) {
-  console.log(str);
+  //console.log(str);
   var d = document.createElement('div');
   d.innerHTML = str;
   document.getElementById('isaw').appendChild(d);
@@ -82,7 +82,7 @@ function preproc(url, targetLen, meanimg, callback) {
 
 
 function start2(murl) {
-   $("#re").css("color","rgb(0,0,255)");
+   $("#re").css("color","rgb(0,0,0)");
    $("#re").html("Let me see  <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"> </span>");
 	 $('#isaw').html("> waiting for image...");
    $("#ld").show();
@@ -125,7 +125,7 @@ else{
                 
                   $("#re").css("color","#f0ad4e");
 
-               $("#re").html("Processing convolutional neural networks..."+releft );
+               $("#re").html("Passing visuals to retina layer..."+releft );
         
                nleft = pred.partialforward(step);
                progress = (step + 1) / (nleft + step + 1) * 100;
@@ -160,7 +160,7 @@ else{
                
                $("#re").css("color","rgb(0,0,0");
                   
-                $("#re").html("Looks like <span style=\"border-raidus:4px;background-color: #5bc0de;padding-left:4px;padding-right:4px;color: #ffffff;\">"+wis.substring(10)+"</span>");
+                $("#re").html("Looks like <span style=\"border-radius:4px;background-color: #935BDE;padding-left:4px;padding-right:4px;color: #ffffff;\">"+wis.substring(10)+"</span>");
                 
 			   logEvent('Elapsed time ' + time + 'secs' );
 			   
