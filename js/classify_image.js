@@ -100,15 +100,10 @@ $.ajax({
        xhr.addEventListener("progress", function(evt){
          if (evt.lengthComputable) {
            var percentComplete = evt.loaded / evt.total;
-           //console.log(percentComplete*100);
+           console.log(percentComplete*100);
            logProgress(percentComplete*100);
            NProgress.set(percentComplete);
-           if (percentComplete*100==100)
-           {
-            resetProgress();
-           $("#ld").hide();
-
-           }
+           
          }
        }, false);
        return xhr;
@@ -117,7 +112,8 @@ $.ajax({
      url: "./model/fastpoor.json",
       dataType: 'json',
      success: function(model){
-    
+     resetProgress();
+      $("#ld").hide();
       NProgress.done();
      if (murl.length == 0) {
     
