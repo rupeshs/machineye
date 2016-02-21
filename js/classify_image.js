@@ -86,18 +86,46 @@ function start2(murl) {
    $("#re").html("Let me see  <span class=\"glyphicon glyphicon-eye-open\" aria-hidden=\"true\"> </span>");
 	 $('#isaw').html("> waiting for image...");
    $("#ld").show();
+    $('#ipg')
+        .attr('class', 'progress-bar progress-bar-default')
+        .css('width', '0%')
+        .attr('aria-valuenow', '0')
+        .html('');
  NProgress.start();
+$.ajax({
+     xhr: function(){
+       var xhr = new window.XMLHttpRequest();
+      
+     //Download progress
+       xhr.addEventListener("progress", function(evt){
+         if (evt.lengthComputable) {
+           var percentComplete = evt.loaded / evt.total;
+           //console.log(percentComplete*100);
+           logProgress(percentComplete*100);
+           NProgress.set(percentComplete);
+           if (percentComplete*100==100)
+           {
+            resetProgress();
+           $("#ld").hide();
 
-
-   $.getJSON("./model/fastpoor.json", function(model) {
-       NProgress.done();
-	   if (murl.length == 0) {
-	  
-	  var url = document.getElementById("imageURL").value;
+           }
+         }
+       }, false);
+       return xhr;
+     },
+     type: 'GET',
+     url: "./model/fastpoor.json",
+      dataType: 'json',
+     success: function(model){
+    
+      NProgress.done();
+     if (murl.length == 0) {
+    
+    var url = document.getElementById("imageURL").value;
 }
 else{
-	var url = murl;
-	
+  var url = murl;
+  
 }
        pred = new Predictor(model, {'data': [1, 3, 224, 224]});
        preproc(url, 224, pred.meanimg,  function(nd) {
@@ -107,7 +135,7 @@ else{
             $("#re").html("Processing vision...");
 
            logEvent("> Let me think...");
-		   
+       
            // delay 1sec before running prediction, so the log event renders on webpage.
            var start = new Date().getTime();
            // print every 10%
@@ -145,7 +173,7 @@ else{
            }
            trainloop(0, 1, 0, function() {
                //logEvent("finished prediction...");
-			      $("#ipg").hide();
+            $("#ipg").hide();
 
 
                out = pred.output(0);
@@ -162,16 +190,16 @@ else{
                   
                 $("#re").html("Looks like <span style=\"border-radius:4px;background-color: #935BDE;padding-left:4px;padding-right:4px;color: #ffffff;\">"+wis.substring(10)+"</span>");
                 
-			   logEvent('Elapsed time ' + time + 'secs' );
-			   
+         logEvent('Elapsed time ' + time + 'secs' );
+         
                 
-			  pred.destroy();
+        pred.destroy();
            });
        });
-   }).always(function() {
-    $("#ld").fadeOut();
-    
-  });;
+    //console.log(model);
+    //alert(model);
+    }
+ });
 }
   function blurElement(element, size){
             var filterVal = 'blur('+size+'px)';
