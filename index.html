@@ -24,7 +24,7 @@
    
    $(document).ready(function() {
   // Handler for .ready() called.
-
+$("#ld").hide();
    $.ajaxSetup({ cache: true });
    NProgress.start();
   $("#file_input").change(function(e){
@@ -85,7 +85,7 @@ start2(url);
 	 
 	 </div></div>
 			  <div class="tab-pane" id="imu">
-			  <div class="input-group" style="margin-top:20px;">
+			  <div class="input-group" style="margin-top:20px;margin-bottom:20px;">
       <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>  
       <input type="text" name="imageurl" id="imageURL" class="form-control" placeholder="Image URL..." required>
       <span class="input-group-btn">
@@ -100,7 +100,7 @@ start2(url);
 			  </div>
 			  
   <div class="col-md-6">		
-  <img id="ld" src="loader.gif"></img>  
+  <div id="ld" style="display:inline-block;"><img  src="loader.gif"></img>Loading model...please wait </div> 
   <div class="progress">
   <div  id="ipg" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0"
          aria-valuemin="0" aria-valuemax="100" >
