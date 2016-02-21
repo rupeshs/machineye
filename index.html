@@ -6,16 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
    <meta name=description content="Makes your machines to see">
    <meta name=keywords content="deeplearning,machineeye,neuralnetwork,ai,mxnet">
-
   <title>Machine Eye | Makes your machines to see</title>
-
-
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script src="js/libmxnet_predict.js"></script>
-    <script src="js/nprogress.js"></script>
+  <script src="js/nprogress.js"></script>
   <script src="js/mxnet_predict.js"></script>
   <script src="js/classify_image.js"></script>
    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
@@ -27,22 +23,15 @@
    
    $(document).ready(function() {
   // Handler for .ready() called.
-$("#ld").hide();
+   $("#ld").hide();
    $.ajaxSetup({ cache: true });
    NProgress.start();
   $("#file_input").change(function(e){
-
-
     var URL = window.URL || window.URL;
     var url = URL.createObjectURL(e.target.files[0]);
     var img = new Image();
     img.src = url;
-
-
-start2(url);
-  
-
-
+    start2(url);
 });
  NProgress.set(1.0);
 });
