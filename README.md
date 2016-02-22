@@ -1,5 +1,5 @@
-# machineye
-Makes your machines to see
+# Machine Eye
+Web service for local image file/image URL classification without uploading.
 
 Uses mxnet https://github.com/dmlc/mxnet for image classification.
 
